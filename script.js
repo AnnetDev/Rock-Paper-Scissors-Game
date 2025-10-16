@@ -1,49 +1,90 @@
+const humanScoreValue = document.querySelector('[data-id="human-score-value"]');
+const computerScoreValue = document.querySelector('[data-id="computer-score-value"]');
+const humanChoiceIcon = document.querySelector('[data-id="human-choice-icon"]');
+const computerChoiceIcon = document.querySelector('[data-id="computer-choice-icon"]');
+const choiceList = document.querySelector('[data-id="choice-list"]');
+const rockChoice = document.querySelector('[data-id="rock-choice"]');
+const paperChoice = document.querySelector('[data-id="paper-choice"]');
+const scissorsChoice = document.querySelector('[data-id="scissors-choice"]');
+const playAgainBtn = document.querySelector('[data-id="play-again-btn"]');
+const resetBtn = document.querySelector('[data-id="reset-btn"]');
+
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
     const choices = ['rock', 'paper', 'scissors'];
     const choiceIndex = Math.floor(Math.random() * choices.length);
     const computerChoice = choices[choiceIndex];
-    console.log(computerChoice);
+
+    if (computerChoice === 'rock') computerChoiceIcon.textContent = '🪨';
+    else if (computerChoice === 'paper') computerChoiceIcon.textContent = '📄';
+    else if (computerChoice === 'scissors') computerChoiceIcon.textContent = '✂️';
+
     return computerChoice;
 }
 
-function getHumanChoice() {
-    const humanChoice = prompt("Enter rock, paper, or scissors:").toLowerCase();
-
-    console.log("your hoice: " + humanChoice);
-    return humanChoice;
+function updateScore() {
+    humanScoreValue.textContent = humanScore;
+    computerScoreValue.textContent = computerScore;
 }
 
-function playGame(numRounds) {
-    let computerScore = 0;
-    let humanScore = 0;
+function playRound(humanChoice) {
+    const computerChoice = getComputerChoice();
 
-    function playRound(humanChoice, computerChoice) {
-        if (humanChoice === computerChoice) {
-            return console.log("It's a tie!");
-        } else if (
-            (humanChoice === 'rock' && computerChoice === 'scissors') ||
-            (humanChoice === 'paper' && computerChoice === 'rock') ||
-            (humanChoice === 'scissors' && computerChoice === 'paper')
-        ) {
-            humanScore++;
-            return console.log("You win this round!");
-        } else {
-            computerScore++;
-            return console.log("Computer wins this round!");
-        }
+    if (humanChoice === computerChoice) {
+        console.log("It's a tie!");
+    } else if (
+        (humanChoice === 'rock' && computerChoice === 'scissors') ||
+        (humanChoice === 'paper' && computerChoice === 'rock') ||
+        (humanChoice === 'scissors' && computerChoice === 'paper')
+    ) {
+        humanScore++;
+        console.log("You win this round!");
+    } else {
+        computerScore++;
+        console.log("Computer wins this round!");
     }
 
-    let round = 0;
-    while(round < numRounds) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-        console.log(humanScore, computerScore);
-    }
-
-    let winner;
-    winner = humanScore > computerScore ? "You win the game!" : humanScore < computerScore ? "Computer wins the game!" : "The game is a tie!";
-    console.log(winner);
+    updateScore();
 }
 
-playGame(2);
+choiceList.addEventListener('click', (e) => {
+    const choiceItem = e.target.closest('li[data-id]');
+    
+    if (!choiceItem) return;
+
+    let humanChoice;
+
+    switch (choiceItem.dataset.id) {
+        case 'rock-choice':
+            humanChoiceIcon.textContent = '🪨';
+            humanChoice = 'rock';
+            break;
+        case 'paper-choice':
+            humanChoiceIcon.textContent = '📄';
+            humanChoice = 'paper';
+            break;
+        case 'scissors-choice':
+            humanChoiceIcon.textContent = '✂️';
+            humanChoice = 'scissors';
+            break;
+    }
+
+    if (humanChoice) {
+        playRound(humanChoice);
+    }
+});
+
+resetBtn.addEventListener('click', () => {
+    humanScore = 0;
+    computerScore = 0;
+    updateScore();
+    humanChoiceIcon.textContent = '✋🏻';
+    computerChoiceIcon.textContent = '✋🏻';
+});
+
+playAgainBtn.addEventListener('click', () => {
+    humanChoiceIcon.textContent = '✋🏻';
+    computerChoiceIcon.textContent = '✋🏻';
+})
