@@ -1,0 +1,17 @@
+{
+  "name": "rock-paper-scissors-game",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "dev": "sass --watch src/styles/main.scss src/styles/main.css",
+  "build": "sass src/styles/main.scss src/styles/main.css --style=compressed",
+  "deploy": "npm run build && gh-pages -d ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "sass": "^1.93.2"
+  }
+}
