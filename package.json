@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "dev": "sass --watch src/styles/main.scss src/styles/main.css",
-  "build": "sass src/styles/main.scss src/styles/main.css --style=compressed",
-  "deploy": "npm run build && gh-pages -d ."
+    "dev": "npx npm-run-all --parallel watch serve",
+    "watch": "sass --watch src/styles/styles.scss src/styles/styles.css",
+    "serve": "live-server --port=8080 --open=./index.html",
+    "build": "mkdir -p dist && sass src/styles/styles.scss dist/styles.css --style=compressed && cp index.html dist/ && cp src/script.js dist/",
+    "deploy": "npm run build && gh-pages -d dist"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "devDependencies": {
-    "sass": "^1.93.2"
+    "sass": "^1.93.2",
+    "gh-pages": "^6.1.1",
+    "live-server": "^1.2.2",
+    "npm-run-all": "^4.1.5"
   }
 }
