@@ -1,12 +1,13 @@
 {
   "name": "rock-paper-scissors-game",
   "version": "1.0.0",
-  "main": "main.js",
+  "description": "Responsive Rock Paper Scissors Game",
+  "main": "script.js",
   "scripts": {
-    "dev": "npx npm-run-all --parallel watch serve",
+    "dev": "npm-run-all --parallel watch serve",
     "watch": "sass --watch src/styles/styles.scss src/styles/styles.css",
     "serve": "live-server --port=8080 --open=./index.html",
-    "build": "mkdir -p dist && sass src/styles/styles.scss dist/styles.css --style=compressed && cp index.html dist/ && cp src/script.js dist/",
+    "build": "rm -rf dist && mkdir dist && sass src/styles/styles.scss dist/styles.css --style=compressed && cp src/script.js dist/script.js && cp index.html dist/index.html",
     "deploy": "npm run build && gh-pages -d dist"
   },
   "devDependencies": {

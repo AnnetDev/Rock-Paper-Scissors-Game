@@ -5,7 +5,7 @@
 }
 
 html {
-    height: 100%; 
+    height: 100%;
     scroll-behavior: smooth;
 }
 
@@ -27,9 +27,9 @@ body {
     min-height: 100vh;
     width: 100%;
     min-width: 320px;
-    display: flex; 
-    flex-direction: column; 
-    justify-content: space-between; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     overflow-x: hidden;
     font-family: "Inconsolata", Consolas, monospace;
     font-size: 16px;
@@ -38,6 +38,27 @@ body {
     background-size: 300% 100%;
     background-repeat: no-repeat;
     background-position: cover;
+    transition: opacity 0.4s ease-in-out;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 29, 51, 0.4);
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+body.overlay-active::after {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+body.overlay-no-scroll {
+    overflow: hidden;
 }
 
 main {
@@ -45,3 +66,63 @@ main {
     min-width: 320px;
 
 }
+
+.container {
+    padding: 0 30px;
+
+    @media (min-width: 768px) {
+        padding: 0 40px;
+    }
+
+    @media (min-width: 1200px) {
+        padding: 0 60px;
+    }
+}
+
+button {
+    cursor: pointer;
+    transition: all ease 0.3s;
+
+
+    &:hover,
+    &:focus {
+        opacity: 0.7;
+        background-color: #CCEAF2;
+    }
+
+    &:active {
+        opacity: 0.5;
+    }
+}
+
+
+
+
+.message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.8);
+    color: #BE32DD;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    pointer-events: none;
+    font-size: 1.2rem;
+    z-index: 100;
+    width: 80%;
+    height: 150px;
+
+  }
+  
+  .message--visible {
+    opacity: 1;
+  }
+  
