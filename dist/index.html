@@ -1,11 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="src/styles/styles.css">
 </head>
+
 <body>
+    <main>
+        <section class="game-section container">
+            <h1 class="game-section__heading">Rock Paper Scissors</h1>
+            <div class="game-section__score">
+                <table>
+                    <tr>
+                        <th class="game-section__human-score">You</th>
+                        <th class="game-section__computer-score">Computer</th>
+                    </tr>
+                    <tr>
+                        <td class="game-section__human-score-value" data-id="human-score-value">0</td>
+                        <td class="game-section__computer-score-value" data-id="computer-score-value">0</td>
+                    </tr>
+                </table>
+            </div>
+
+            <ul class="game-section__choice-result">
+                <li class="game-section__choice-result-human game-section__choice-result-item">
+                    <h2 class="game-section__human-choice-heading">Your choice</h2>
+                    <div class="game-section__choice-result-human-icon game-section__choice-result-item-icon">
+                        <span data-id="human-choice-icon">✋🏻</span>
+                    </div>
+                </li>
+                <li class="game-section__choice-result-computer game-section__choice-result-item">
+                    <h2 class="game-section__computer-choice-heading">Computer's choice</h2>
+                    <div class="game-section__choice-result-computer-icon game-section__choice-result-item-icon">
+                        <span data-id="computer-choice-icon">✋🏻</span>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="game-section__choice">
+                <ul class="game-section__choice-list" data-id="choice-list">
+                    <li data-id="rock-choice">
+                        <button class="button game-section__choice-btn">
+                            <span class="game-section__choice-icon">🪨</span>
+                            <p>Rock</p>
+                        </button>
+                    </li>
+                    <li data-id="paper-choice">
+                        <button class="button game-section__choice-btn">
+                            <span class="game-section__choice-icon">📃</span>
+                            <p>Paper</p>
+                        </button>
+                    </li>
+                    <li data-id="scissors-choice">
+                        <button class="button game-section__choice-btn">
+                            <span class="game-section__choice-icon">✂️</span>
+                            <p>Scissors</p>
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="game-section__buttons">
+                    <button class="game-section__button" data-id="play-again-btn">Play Again</button>
+                    <button class="game-section__button" data-id="reset-btn">Reset Scores</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
     <script src="src/script.js"></script>
 </body>
+
 </html>

@@ -10,3 +10,16 @@
     }
 }
 
+button {
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        opacity: 0.7;
+        transition: all ease 0.3s;
+    }
+
+    &:active {
+        opacity: 0.5;
+    }
+}
