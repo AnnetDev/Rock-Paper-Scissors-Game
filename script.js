@@ -1,3 +1,4 @@
+const body = document.querySelector('body');
 const gameContainer = document.querySelector('[data-id="game-section"]');
 const humanScoreValue = document.querySelector('[data-id="human-score-value"]');
 const computerScoreValue = document.querySelector('[data-id="computer-score-value"]');
@@ -32,29 +33,57 @@ function updateScore() {
 
 function playRound(humanChoice) {
     const computerChoice = getComputerChoice();
-        
+    const existingMessage = document.querySelector('.message');
+    if (existingMessage) existingMessage.remove();
+
+    const message = document.createElement('div');
+    message.classList.add('message');
+
+    function showMessage(text) {
+        message.textContent = text;
+        gameContainer.appendChild(message);
+    
+        // Добавляем класс для плавного появления
+        requestAnimationFrame(() => {
+            message.classList.add('message--visible');
+        });
+    
+        body.classList.add('overlay-active');
+    
+        // Через 1.6 секунды начинаем плавное исчезание
+        setTimeout(() => {
+            message.classList.remove('message--visible');
+        }, 1600);
+    
+        // А через 2 секунды полностью убираем элемент
+        setTimeout(() => {
+            body.classList.remove('overlay-active');
+            message.remove();
+        }, 2000);
+    }
+    
 
     if (humanChoice === computerChoice) {
-        console.log("It's a tie!");
-        gameContainer.createElement('div').textContent = "It's a tie!";
+        showMessage("It's a tie! ⚖️");
     } else if (
         (humanChoice === 'rock' && computerChoice === 'scissors') ||
         (humanChoice === 'paper' && computerChoice === 'rock') ||
         (humanChoice === 'scissors' && computerChoice === 'paper')
     ) {
         humanScore++;
-        console.log("You win this round!");
+        showMessage("You win this round! 🏆");
     } else {
         computerScore++;
-        console.log("Computer wins this round!");
+        showMessage("Computer wins this round! 💻");
     }
 
     updateScore();
 }
 
+
 choiceList.addEventListener('click', (e) => {
     const choiceItem = e.target.closest('li[data-id]');
-    
+
     if (!choiceItem) return;
 
     let humanChoice;
