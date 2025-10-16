@@ -1,3 +1,4 @@
+const gameContainer = document.querySelector('[data-id="game-section"]');
 const humanScoreValue = document.querySelector('[data-id="human-score-value"]');
 const computerScoreValue = document.querySelector('[data-id="computer-score-value"]');
 const humanChoiceIcon = document.querySelector('[data-id="human-choice-icon"]');
@@ -31,9 +32,11 @@ function updateScore() {
 
 function playRound(humanChoice) {
     const computerChoice = getComputerChoice();
+        
 
     if (humanChoice === computerChoice) {
         console.log("It's a tie!");
+        gameContainer.createElement('div').textContent = "It's a tie!";
     } else if (
         (humanChoice === 'rock' && computerChoice === 'scissors') ||
         (humanChoice === 'paper' && computerChoice === 'rock') ||
