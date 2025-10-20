@@ -42,42 +42,57 @@ function playRound(humanChoice) {
     function showMessage(text) {
         message.textContent = text;
         gameContainer.appendChild(message);
-    
-        // Добавляем класс для плавного появления
+
+        // Плавное появление
         requestAnimationFrame(() => {
             message.classList.add('message--visible');
         });
-    
+
         body.classList.add('overlay-active');
-    
-        // Через 1.6 секунды начинаем плавное исчезание
+
         setTimeout(() => {
             message.classList.remove('message--visible');
         }, 1600);
-    
-        // А через 2 секунды полностью убираем элемент
+
         setTimeout(() => {
             body.classList.remove('overlay-active');
             message.remove();
         }, 2000);
     }
-    
 
-    if (humanChoice === computerChoice) {
-        showMessage("It's a tie! ⚖️");
-    } else if (
-        (humanChoice === 'rock' && computerChoice === 'scissors') ||
-        (humanChoice === 'paper' && computerChoice === 'rock') ||
-        (humanChoice === 'scissors' && computerChoice === 'paper')
-    ) {
-        humanScore++;
-        showMessage("You win this round! 🏆");
-    } else {
-        computerScore++;
-        showMessage("Computer wins this round! 💻");
+    function roundAnimation(callback) {
+        humanChoiceIcon.classList.remove('icon--hit');
+        computerChoiceIcon.classList.remove('icon--hit');
+
+        requestAnimationFrame(() => {
+            humanChoiceIcon.classList.add('icon--hit');
+            computerChoiceIcon.classList.add('icon--hit');
+        });
+
+        setTimeout(() => {
+            humanChoiceIcon.classList.remove('icon--hit');
+            computerChoiceIcon.classList.remove('icon--hit');
+            callback();
+        }, 1000);
     }
 
-    updateScore();
+    roundAnimation(() => {
+        if (humanChoice === computerChoice) {
+            showMessage("It's a tie! ⚖️");
+        } else if (
+            (humanChoice === 'rock' && computerChoice === 'scissors') ||
+            (humanChoice === 'paper' && computerChoice === 'rock') ||
+            (humanChoice === 'scissors' && computerChoice === 'paper')
+        ) {
+            humanScore++;
+            showMessage("You win this round! 🏆");
+        } else {
+            computerScore++;
+            showMessage("Computer wins this round! 💻");
+        }
+
+        updateScore();
+    });
 }
 
 

@@ -111,14 +111,15 @@ button:active {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  transition: opacity 0.4s ease-in-out;
   pointer-events: none;
   font-size: 1.2rem;
   z-index: 100;
   width: 80%;
   height: 150px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 .message--visible {
@@ -163,7 +164,7 @@ button:active {
   .game-section__heading::before, .game-section__heading::after {
     position: absolute;
     content: "";
-    background-image: url("images/bolt.svg");
+    background-image: url("../images/bolt.svg");
     width: 40px;
     height: 40px;
     top: 50%;
@@ -176,6 +177,7 @@ button:active {
     right: -15%;
   }
 }
+
 .game-section__score {
   display: flex;
   flex-flow: column wrap;
@@ -213,15 +215,18 @@ button:active {
   list-style: none;
   padding: 0;
   width: 90%;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  column-gap: 20px;
 }
 .game-section__choice-result h2 {
   padding: 0;
+  margin: 10px 0 0;
   display: inline-block;
   text-align: center;
   font-size: 0.9rem;
+  grid-area: 1/span 1;
 }
 @media (min-width: 768px) {
   .game-section__choice-result h2 {
@@ -239,12 +244,12 @@ button:active {
   border-radius: 15px;
   background-color: white;
   color: #434859;
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-  height: 150px;
-  width: 45%;
-  gap: 20px;
+  display: grid;
+  grid-template-rows: auto auto;
+  justify-items: center;
+  min-height: 150px;
+  height: auto;
+  width: 100%;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
 }
 @media (min-width: 768px) {
@@ -255,9 +260,53 @@ button:active {
 }
 
 .game-section__choice-result-item-icon {
-  width: max-content;
-  height: auto;
-  scale: 2.5;
+  grid-area: -1/span 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.game-section__choice-result-item-icon span {
+  font-size: 2.5rem;
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+@media (min-width: 768px) {
+  .game-section__choice-result-item-icon span {
+    font-size: 3rem;
+  }
+}
+
+.icon--hit.icon--hit[data-id=human-choice-icon] {
+  transform: translateX(60px) scale(1.8);
+}
+@media (min-width: 768px) {
+  .icon--hit.icon--hit[data-id=human-choice-icon] {
+    transform: translateX(80px) scale(1.8);
+  }
+}
+@media (min-width: 1200px) {
+  .icon--hit.icon--hit[data-id=human-choice-icon] {
+    transform: translateX(100px) scale(1.8);
+  }
+}
+
+.icon--hit[data-id=computer-choice-icon] {
+  transform: translateX(-60px) scale(1.8);
+}
+@media (min-width: 768px) {
+  .icon--hit[data-id=computer-choice-icon] {
+    transform: translateX(-80px) scale(1.8);
+  }
+}
+@media (min-width: 1200px) {
+  .icon--hit[data-id=computer-choice-icon] {
+    transform: translateX(-100px) scale(1.8);
+  }
+}
+
+[data-id=human-choice-icon],
+[data-id=computer-choice-icon] {
+  will-change: transform;
 }
 
 .game-section__choice {
@@ -276,28 +325,22 @@ button:active {
 }
 
 .game-section__choice-list {
-  display: flex;
-  flex-flow: row wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   list-style: none;
   padding: 0;
   margin: 0 0 30px;
-  justify-content: center;
+  justify-items: center;
   gap: 10px;
 }
 .game-section__choice-list li {
   min-width: 30px;
-}
-@media (min-width: 768px) {
-  .game-section__choice-list {
-    justify-content: space-between;
-  }
-  .game-section__choice-list li {
-    min-width: 30%;
-  }
+  width: 100%;
+  height: auto;
 }
 
 .game-section__choice-btn {
-  padding: 10px;
+  padding: 30px 10px;
   border-radius: 15px;
   color: white;
   background-image: linear-gradient(160deg, #88d3ce 0%, #6e45e2 100%);
@@ -307,18 +350,13 @@ button:active {
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
   font-size: 0.9rem;
 }
-@media (min-width: 768px) {
-  .game-section__choice-btn p {
-    font-size: 1.1rem;
-  }
-}
 
 .game-section__choice-icon {
-  font-size: 1.1rem;
+  font-size: 2rem;
 }
 @media (min-width: 768px) {
   .game-section__choice-icon {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 }
 
@@ -328,12 +366,6 @@ button:active {
   justify-content: center;
   gap: 10px;
 }
-@media (min-width: 768px) {
-  .game-section__buttons {
-    justify-content: space-between;
-  }
-}
-
 .game-section__button {
   border: none;
   padding: 15px;
