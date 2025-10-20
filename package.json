@@ -7,7 +7,7 @@
     "dev": "npm-run-all --parallel watch serve",
     "watch": "sass --watch src/styles/styles.scss src/styles/styles.css",
     "serve": "live-server --port=8080 --open=./index.html",
-    "build": "rm -rf dist && mkdir dist && sass src/styles/styles.scss dist/styles.css --style=compressed && cp -r src/images dist/images && cp index.html dist/index.html && sed -i '' 's|src/styles/styles.css|styles.css|' dist/index.html && sed -i '' 's|src/script.js|script.js|' dist/index.html && cp src/script.js dist/script.js",
+    "build": "rm -rf dist && mkdir dist && sass src/styles/styles.scss dist/styles.css --style=compressed && cp -r src/images dist/images && cp -r src/fonts dist/fonts && cp index.html dist/index.html && sed -i '' 's|src/styles/styles.css|styles.css|' dist/index.html && sed -i '' 's|src/script.js|script.js|' dist/index.html && cp src/script.js dist/script.js",
     "deploy": "npm run build && gh-pages -d dist"
   },
   "devDependencies": {
